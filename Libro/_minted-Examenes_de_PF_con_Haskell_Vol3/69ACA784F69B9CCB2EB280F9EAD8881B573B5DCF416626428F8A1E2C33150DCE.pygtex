@@ -1,0 +1,63 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Informática (1º del Grado en Matemáticas, Grupo 2)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 1º examen de evaluación continua (27 de octubre de 2011)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 1. Los puntos del plano se pueden representar mediante}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} pares de números reales.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Definir la función estanEnLinea tal que (estanEnLinea p1 p2) se}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} verifica si los puntos p1 y p2 están en la misma línea vertical u}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} horizontal. Por ejemplo, }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    estanEnLinea (1,3) (1,\PYGZhy{}6)  == True}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    estanEnLinea (1,3) (\PYGZhy{}1,\PYGZhy{}6) == False}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    estanEnLinea (1,3) (\PYGZhy{}1,3)  == True}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{estanEnLinea} \PYG{p}{(}\PYG{n}{x1}\PYG{p}{,}\PYG{n}{y1}\PYG{p}{)} \PYG{p}{(}\PYG{n}{x2}\PYG{p}{,}\PYG{n}{y2}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{x1} \PYG{o}{==} \PYG{n}{x2} \PYG{o}{||} \PYG{n}{y1} \PYG{o}{==} \PYG{n}{y2}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 2. Definir la función pCardinales tal que }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (pCardinales (x,y) d) es la lista formada por los cuatro puntos}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} situados al norte, sur este y oeste, a una distancia d de (x,y).}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    pCardinales (0,0) 2  == [(0,2),(0,\PYGZhy{}2),(\PYGZhy{}2,0),(2,0)]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    pCardinales (\PYGZhy{}1,3) 4 == [(\PYGZhy{}1,7),(\PYGZhy{}1,\PYGZhy{}1),(\PYGZhy{}5,3),(3,3)]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{pCardinales} \PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{)} \PYG{n}{d} \PYG{o+ow}{=} \PYG{p}{[(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{o}{+}\PYG{n}{d}\PYG{p}{),(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{o}{\PYGZhy{}}\PYG{n}{d}\PYG{p}{),(}\PYG{n}{x}\PYG{o}{\PYGZhy{}}\PYG{n}{d}\PYG{p}{,}\PYG{n}{y}\PYG{p}{),(}\PYG{n}{x}\PYG{o}{+}\PYG{n}{d}\PYG{p}{,}\PYG{n}{y}\PYG{p}{)]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 3. Definir la función elementosCentrales tal que }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (elementosCentrales xs) es la lista formada por el elemento central}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} si xs tiene un número impar de elementos, y los dos elementos}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} centrales si xs tiene un número par de elementos. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    elementosCentrales [1..8] == [4,5]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    elementosCentrales [1..7] == [4]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{elementosCentrales} \PYG{n}{xs} 
+    \PYG{o}{|} \PYG{n}{even} \PYG{n}{n}   \PYG{o+ow}{=} \PYG{p}{[}\PYG{n}{xs}\PYG{o}{!!}\PYG{p}{(}\PYG{n}{m}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{),} \PYG{n}{xs}\PYG{o}{!!}\PYG{n}{m}\PYG{p}{]}
+    \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{p}{[}\PYG{n}{xs} \PYG{o}{!!} \PYG{n}{m}\PYG{p}{]}
+    \PYG{k+kr}{where} \PYG{n}{n} \PYG{o+ow}{=} \PYG{n}{length} \PYG{n}{xs}
+          \PYG{n}{m} \PYG{o+ow}{=} \PYG{n}{n} \PYG{p}{`}\PYG{n}{div}\PYG{p}{`} \PYG{l+m+mi}{2}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 4. Consideremos el problema geométrico siguiente: partir un}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} segmento en dos trozos, a y b, de forma que, al dividir la longitud}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} total entre el mayor (supongamos que es a), obtengamos el mismo}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} resultado que al dividir la longitud del mayor entre la del menor.  }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Definir la función esParAureo tal que (esParAureo a b)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} se verifica si a y b forman un par con la característica anterior.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Por ejemplo, }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    esParAureo 3 5                 == False}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    esParAureo 1 2                 == False}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    esParAureo ((1+ (sqrt 5))/2) 1 == True}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{esParAureo} \PYG{n}{a} \PYG{n}{b} \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{a}\PYG{o}{+}\PYG{n}{b}\PYG{p}{)}\PYG{o}{/}\PYG{n}{c} \PYG{o}{==} \PYG{n}{c}\PYG{o}{/}\PYG{n}{d}
+    \PYG{k+kr}{where} \PYG{n}{c} \PYG{o+ow}{=} \PYG{n}{max} \PYG{n}{a} \PYG{n}{b}
+          \PYG{n}{d} \PYG{o+ow}{=} \PYG{n}{min} \PYG{n}{a} \PYG{n}{b}
+\end{Verbatim}

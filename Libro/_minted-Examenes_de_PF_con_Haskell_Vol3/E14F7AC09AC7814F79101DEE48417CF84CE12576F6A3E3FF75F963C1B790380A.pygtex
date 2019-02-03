@@ -1,0 +1,138 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Informática (1º del Grado en Matemáticas, Grupo 4)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 2º examen de evaluación continua (30 de noviembre de 2011)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 1. Un número es tipo repunit si todos sus dígitos son}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 1. Por ejemplo, el número 1111 es repunit.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Definir la función }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    menorRepunit :: Integer \PYGZhy{}\PYGZgt{} Integer}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (menorRepunit n) es el menor repunit que es múltiplo de}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} n. Por ejemplo, }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    menorRepunit 3  == 111}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    menorRepunit 7  == 111111}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{menorRepunit} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer}
+\PYG{n+nf}{menorRepunit} \PYG{n}{n} \PYG{o+ow}{=} \PYG{n}{head} \PYG{p}{[}\PYG{n}{x} \PYG{o}{|} \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{[}\PYG{n}{n}\PYG{p}{,}\PYG{n}{n}\PYG{o}{*}\PYG{l+m+mi}{2}\PYG{o}{..}\PYG{p}{],} \PYG{n}{repunit} \PYG{n}{x}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (repunit n) se verifica si n es un repunit. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    repunit 1111  ==  True}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    repunit 1121  ==  False}
+\PYG{n+nf}{repunit} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}
+\PYG{n+nf}{repunit} \PYG{n}{n} \PYG{o+ow}{=} \PYG{n}{and} \PYG{p}{[}\PYG{n}{x} \PYG{o}{==} \PYG{l+m+mi}{1} \PYG{o}{|} \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{cifras} \PYG{n}{n}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (cifras n) es la lista de las cifras de n. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    cifras 325  ==  [3,2,5]}
+\PYG{n+nf}{cifras} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Integer}\PYG{p}{]}
+\PYG{n+nf}{cifras} \PYG{n}{n} \PYG{o+ow}{=} \PYG{p}{[}\PYG{n}{read} \PYG{p}{[}\PYG{n}{d}\PYG{p}{]} \PYG{o}{|} \PYG{n}{d} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{show} \PYG{n}{n}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 2. Definir la función }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    maximos :: [Float \PYGZhy{}\PYGZgt{} Float] \PYGZhy{}\PYGZgt{} [Float] \PYGZhy{}\PYGZgt{} [Float]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (maximos fs xs) es la lista de los máximos de aplicar}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} cada función de fs a los elementos de xs. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    maximos [(/2),(2/)] [5,10]                 == [5.0,0.4]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    maximos [(\PYGZca{}2),(/2),abs,(1/)] [1,\PYGZhy{}2,3,\PYGZhy{}4,5] == [25.0,2.5,5.0,1.0]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 1ª definición:}
+\PYG{n+nf}{maximos} \PYG{o+ow}{::} \PYG{p}{[}\PYG{k+kt}{Float} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Float}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Float}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Float}\PYG{p}{]}
+\PYG{n+nf}{maximos} \PYG{n}{fs} \PYG{n}{xs} \PYG{o+ow}{=} \PYG{p}{[}\PYG{n}{maximum} \PYG{p}{[}\PYG{n}{f} \PYG{n}{x} \PYG{o}{|} \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{xs}\PYG{p}{]} \PYG{o}{|} \PYG{n}{f} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{fs}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 2ª definición:}
+\PYG{n+nf}{maximos2} \PYG{o+ow}{::} \PYG{p}{[}\PYG{k+kt}{Float} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Float}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Float}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Float}\PYG{p}{]}
+\PYG{n+nf}{maximos2} \PYG{n}{fs} \PYG{n}{xs} \PYG{o+ow}{=} \PYG{n}{map} \PYG{n}{maximum} \PYG{p}{[} \PYG{n}{map} \PYG{n}{f} \PYG{n}{xs} \PYG{o}{|} \PYG{n}{f} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{fs}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 3. Definir la función }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    reduceCifras :: Integer \PYGZhy{}\PYGZgt{} Integer}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (reduceCifras n) es el resultado de la reducción recursiva de}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} sus cifras; es decir, a partir del número n, se debe calcular la suma}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} de las cifras de n (llamémosle c), pero si c es a su vez mayor que 9,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} se debe volver a calcular la suma de cifras de c y así sucesivamente}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} hasta que el valor obtenido sea menor o igual que 9. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    reduceCifras   5   ==  5}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    reduceCifras 123   ==  6 }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    reduceCifras 190   ==  1}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    reduceCifras 3456  ==  9}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{reduceCifras} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer}
+\PYG{n+nf}{reduceCifras} \PYG{n}{n} \PYG{o}{|} \PYG{n}{m} \PYG{o}{\PYGZlt{}=} \PYG{l+m+mi}{9}    \PYG{o+ow}{=} \PYG{n}{m}
+               \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{n}{reduceCifras} \PYG{n}{m}
+               \PYG{k+kr}{where} \PYG{n}{m} \PYG{o+ow}{=} \PYG{n}{sum} \PYG{p}{(}\PYG{n}{cifras} \PYG{n}{n}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (sumaCifras n) es la suma de las cifras de n. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumaCifras 3456  ==  18}
+\PYG{n+nf}{sumaCifras} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer} 
+\PYG{n+nf}{sumaCifras} \PYG{n}{n} \PYG{o+ow}{=} \PYG{n}{sum} \PYG{p}{(}\PYG{n}{cifras} \PYG{n}{n}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 4. Las bases de datos con el nombre, profesión, año de}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} nacimiento y año de defunción de una serie de personas se puede}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} representar como sigue }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    personas :: [(String,String,Int,Int)]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    personas = [(\PYGZdq{}Cervantes\PYGZdq{},\PYGZdq{}Literatura\PYGZdq{},1547,1616),}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                (\PYGZdq{}Velazquez\PYGZdq{},\PYGZdq{}Pintura\PYGZdq{},1599,1660),}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                (\PYGZdq{}Picasso\PYGZdq{},\PYGZdq{}Pintura\PYGZdq{},1881,1973),}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                (\PYGZdq{}Beethoven\PYGZdq{},\PYGZdq{}Musica\PYGZdq{},1770,1823),}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                (\PYGZdq{}Poincare\PYGZdq{},\PYGZdq{}Ciencia\PYGZdq{},1854,1912),}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                (\PYGZdq{}Quevedo\PYGZdq{},\PYGZdq{}Literatura\PYGZdq{},1580,1654),}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                (\PYGZdq{}Goya\PYGZdq{},\PYGZdq{}Pintura\PYGZdq{},1746,1828),}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                (\PYGZdq{}Einstein\PYGZdq{},\PYGZdq{}Ciencia\PYGZdq{},1879,1955),}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                (\PYGZdq{}Mozart\PYGZdq{},\PYGZdq{}Musica\PYGZdq{},1756,1791),}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                (\PYGZdq{}Botticelli\PYGZdq{},\PYGZdq{}Pintura\PYGZdq{},1445,1510),}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                (\PYGZdq{}Borromini\PYGZdq{},\PYGZdq{}Arquitectura\PYGZdq{},1599,1667),}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                (\PYGZdq{}Bach\PYGZdq{},\PYGZdq{}Musica\PYGZdq{},1685,1750)]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Es decir, se indica que por ejemplo Mozart se dedicó a la Música y}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} vivió entre 1756 y 1791. }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Definir la función }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    coetaneos :: [(String,String,Int,Int)] \PYGZhy{}\PYGZgt{} String \PYGZhy{}\PYGZgt{} [String]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (coetaneos bd p) es la lista de nombres de personas que}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} fueron coetáneos con la persona p; es decir que al menos alguno}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} de los años vividos por ambos coincidan. Se considera que una persona}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} no es coetanea a sí misma. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    coetaneos personas \PYGZdq{}Einstein\PYGZdq{}   == [\PYGZdq{}Picasso\PYGZdq{}, \PYGZdq{}Poincare\PYGZdq{}]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    coetaneos personas \PYGZdq{}Botticelli\PYGZdq{} == []}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{personas} \PYG{o+ow}{::} \PYG{p}{[(}\PYG{k+kt}{String}\PYG{p}{,}\PYG{k+kt}{String}\PYG{p}{,}\PYG{k+kt}{Int}\PYG{p}{,}\PYG{k+kt}{Int}\PYG{p}{)]}
+\PYG{n+nf}{personas} \PYG{o+ow}{=} \PYG{p}{[(}\PYG{l+s}{\PYGZdq{}Cervantes\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Literatura\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{1547}\PYG{p}{,}\PYG{l+m+mi}{1616}\PYG{p}{),}
+              \PYG{p}{(}\PYG{l+s}{\PYGZdq{}Velazquez\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Pintura\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{1599}\PYG{p}{,}\PYG{l+m+mi}{1660}\PYG{p}{),}
+              \PYG{p}{(}\PYG{l+s}{\PYGZdq{}Picasso\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Pintura\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{1881}\PYG{p}{,}\PYG{l+m+mi}{1973}\PYG{p}{),}
+              \PYG{p}{(}\PYG{l+s}{\PYGZdq{}Beethoven\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Musica\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{1770}\PYG{p}{,}\PYG{l+m+mi}{1823}\PYG{p}{),}
+              \PYG{p}{(}\PYG{l+s}{\PYGZdq{}Poincare\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Ciencia\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{1854}\PYG{p}{,}\PYG{l+m+mi}{1912}\PYG{p}{),}
+              \PYG{p}{(}\PYG{l+s}{\PYGZdq{}Quevedo\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Literatura\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{1580}\PYG{p}{,}\PYG{l+m+mi}{1654}\PYG{p}{),}
+              \PYG{p}{(}\PYG{l+s}{\PYGZdq{}Goya\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Pintura\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{1746}\PYG{p}{,}\PYG{l+m+mi}{1828}\PYG{p}{),}
+              \PYG{p}{(}\PYG{l+s}{\PYGZdq{}Einstein\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Ciencia\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{1879}\PYG{p}{,}\PYG{l+m+mi}{1955}\PYG{p}{),}
+              \PYG{p}{(}\PYG{l+s}{\PYGZdq{}Mozart\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Musica\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{1756}\PYG{p}{,}\PYG{l+m+mi}{1791}\PYG{p}{),}
+              \PYG{p}{(}\PYG{l+s}{\PYGZdq{}Botticelli\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Pintura\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{1445}\PYG{p}{,}\PYG{l+m+mi}{1510}\PYG{p}{),}
+              \PYG{p}{(}\PYG{l+s}{\PYGZdq{}Borromini\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Arquitectura\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{1599}\PYG{p}{,}\PYG{l+m+mi}{1667}\PYG{p}{),}
+              \PYG{p}{(}\PYG{l+s}{\PYGZdq{}Bach\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}Musica\PYGZdq{}}\PYG{p}{,}\PYG{l+m+mi}{1685}\PYG{p}{,}\PYG{l+m+mi}{1750}\PYG{p}{)]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 1ª solución:}
+\PYG{n+nf}{coetaneos} \PYG{o+ow}{::} \PYG{p}{[(}\PYG{k+kt}{String}\PYG{p}{,}\PYG{k+kt}{String}\PYG{p}{,}\PYG{k+kt}{Int}\PYG{p}{,}\PYG{k+kt}{Int}\PYG{p}{)]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{String} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{String}\PYG{p}{]}
+\PYG{n+nf}{coetaneos} \PYG{n}{bd} \PYG{n}{p} \PYG{o+ow}{=} 
+    \PYG{p}{[}\PYG{n}{n} \PYG{o}{|} \PYG{p}{(}\PYG{n}{n}\PYG{p}{,}\PYG{k+kr}{\PYGZus{}}\PYG{p}{,}\PYG{n}{fn}\PYG{p}{,}\PYG{n}{fd}\PYG{p}{)} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{bd}\PYG{p}{,} 
+         \PYG{n}{n} \PYG{o}{/=} \PYG{n}{p}\PYG{p}{,} 
+         \PYG{n}{not} \PYG{p}{((}\PYG{n}{fd} \PYG{o}{\PYGZlt{}} \PYG{n}{fnp}\PYG{p}{)} \PYG{o}{||} \PYG{p}{(}\PYG{n}{fdp} \PYG{o}{\PYGZlt{}} \PYG{n}{fn}\PYG{p}{))]}
+    \PYG{k+kr}{where} \PYG{p}{(}\PYG{n}{fnp}\PYG{p}{,}\PYG{n}{fdp}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{head} \PYG{p}{[(}\PYG{n}{fn}\PYG{p}{,}\PYG{n}{fd}\PYG{p}{)} \PYG{o}{|} \PYG{p}{(}\PYG{n}{n}\PYG{p}{,}\PYG{k+kr}{\PYGZus{}}\PYG{p}{,}\PYG{n}{fn}\PYG{p}{,}\PYG{n}{fd}\PYG{p}{)} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{bd}\PYG{p}{,} \PYG{n}{n} \PYG{o}{==} \PYG{n}{p}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 2ª solución:}
+
+\PYG{n+nf}{coetaneos2} \PYG{o+ow}{::} \PYG{p}{[(}\PYG{k+kt}{String}\PYG{p}{,}\PYG{k+kt}{String}\PYG{p}{,}\PYG{k+kt}{Int}\PYG{p}{,}\PYG{k+kt}{Int}\PYG{p}{)]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{String} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{String}\PYG{p}{]}
+\PYG{n+nf}{coetaneos2} \PYG{n}{bd} \PYG{n}{p} \PYG{o+ow}{=} 
+    \PYG{p}{[}\PYG{n}{n} \PYG{o}{|} \PYG{p}{(}\PYG{n}{n}\PYG{p}{,}\PYG{k+kr}{\PYGZus{}}\PYG{p}{,}\PYG{n}{fn}\PYG{p}{,}\PYG{n}{fd}\PYG{p}{)} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{bd}\PYG{p}{,} 
+         \PYG{n}{n} \PYG{o}{/=} \PYG{n}{p}\PYG{p}{,}
+         \PYG{n}{not} \PYG{p}{(}\PYG{n}{null} \PYG{p}{(}\PYG{n}{inter} \PYG{p}{[}\PYG{n}{fn}\PYG{o}{..}\PYG{n}{fd}\PYG{p}{]} \PYG{p}{[}\PYG{n}{fnp}\PYG{o}{..}\PYG{n}{fdp}\PYG{p}{]))]}
+    \PYG{k+kr}{where} \PYG{p}{(}\PYG{n}{fnp}\PYG{p}{,}\PYG{n}{fdp}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{head} \PYG{p}{[(}\PYG{n}{fn}\PYG{p}{,}\PYG{n}{fd}\PYG{p}{)} \PYG{o}{|} \PYG{p}{(}\PYG{n}{n}\PYG{p}{,}\PYG{k+kr}{\PYGZus{}}\PYG{p}{,}\PYG{n}{fn}\PYG{p}{,}\PYG{n}{fd}\PYG{p}{)} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{bd}\PYG{p}{,} \PYG{n}{n} \PYG{o}{==} \PYG{n}{p}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (inter xs ys) es la interseción de xs e ys. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    inter [2,5,3,6] [3,7,2]  ==  [2,3]}
+\PYG{n+nf}{inter} \PYG{o+ow}{::} \PYG{k+kt}{Eq} \PYG{n}{a} \PYG{o+ow}{=\PYGZgt{}} \PYG{p}{[}\PYG{n}{a}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{n}{a}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{n}{a}\PYG{p}{]}
+\PYG{n+nf}{inter} \PYG{n}{xs} \PYG{n}{ys} \PYG{o+ow}{=} \PYG{p}{[}\PYG{n}{x} \PYG{o}{|} \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{xs}\PYG{p}{,} \PYG{n}{x} \PYG{p}{`}\PYG{n}{elem}\PYG{p}{`} \PYG{n}{ys}\PYG{p}{]}
+\end{Verbatim}

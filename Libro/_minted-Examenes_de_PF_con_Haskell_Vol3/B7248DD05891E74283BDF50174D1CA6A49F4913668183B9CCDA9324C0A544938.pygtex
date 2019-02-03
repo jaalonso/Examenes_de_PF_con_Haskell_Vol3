@@ -1,0 +1,130 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Informática (1º del Grado en Matemáticas, Grupo 1)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 6º examen de evaluación continua (2 de mayo de 2012)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{k+kr}{import} \PYG{n+nn}{Data.Array}
+\PYG{k+kr}{import} \PYG{n+nn}{Data.List}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 1. Un número x es especial si el número de ocurrencia de}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} cada dígito d de x en x\PYGZca{}2 es el doble del número de ocurrencia de d}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} en x. Por ejemplo, 72576 es especial porque tiene un 2, un 5, un 6 y}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} dos 7 y su cuadrado es 5267275776 que tiene exactamente dos 2, dos 5,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} dos 6 y cuatro 7.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Definir la función}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    especial :: Integer \PYGZhy{}\PYGZgt{} Bool}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (especial x) se verifica si x es un número especial. Por}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    especial 72576  ==  True}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    especial 12     ==  False}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Calcular el menor número especial mayor que 72576.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{especial} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}
+\PYG{n+nf}{especial} \PYG{n}{x} \PYG{o+ow}{=}
+    \PYG{n}{sort} \PYG{p}{(}\PYG{n}{ys} \PYG{o}{++} \PYG{n}{ys}\PYG{p}{)} \PYG{o}{==} \PYG{n}{sort} \PYG{p}{(}\PYG{n}{show} \PYG{p}{(}\PYG{n}{x}\PYG{o}{\PYGZca{}}\PYG{l+m+mi}{2}\PYG{p}{))}
+    \PYG{k+kr}{where} \PYG{n}{ys} \PYG{o+ow}{=} \PYG{n}{show} \PYG{n}{x}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} EL cálculo es}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    ghci\PYGZgt{} head [x | x \PYGZlt{}\PYGZhy{} [72577..], especial x]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    406512}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 2. Definir la función }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    posiciones :: Eq a =\PYGZgt{} a \PYGZhy{}\PYGZgt{} Array (Int,Int) a \PYGZhy{}\PYGZgt{} [(Int,Int)]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (posiciones x p) es la lista de las posiciones de la matriz p}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} cuyo valor es x. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    ghci\PYGZgt{} let p = listArray ((1,1),(2,3)) [1,2,3,2,4,6]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    ghci\PYGZgt{} p}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    array ((1,1),(2,3)) [((1,1),1),((1,2),2),((1,3),3),}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                         ((2,1),2),((2,2),4),((2,3),6)]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    ghci\PYGZgt{} posiciones 2 p}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    [(1,2),(2,1)]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    ghci\PYGZgt{} posiciones 6 p}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    [(2,3)]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    ghci\PYGZgt{} posiciones 7 p}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    []}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{posiciones} \PYG{o+ow}{::} \PYG{k+kt}{Eq} \PYG{n}{a} \PYG{o+ow}{=\PYGZgt{}} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Array} \PYG{p}{(}\PYG{k+kt}{Int}\PYG{p}{,}\PYG{k+kt}{Int}\PYG{p}{)} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[(}\PYG{k+kt}{Int}\PYG{p}{,}\PYG{k+kt}{Int}\PYG{p}{)]}
+\PYG{n+nf}{posiciones} \PYG{n}{x} \PYG{n}{p} \PYG{o+ow}{=} \PYG{p}{[(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{)} \PYG{o}{|} \PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{)} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{indices} \PYG{n}{p}\PYG{p}{,} \PYG{n}{p}\PYG{o}{!}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{)} \PYG{o}{==} \PYG{n}{x}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 3. Definir la función}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    agrupa :: Eq a =\PYGZgt{} [[a]] \PYGZhy{}\PYGZgt{} [[a]]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (agrupa xss) es la lista de las listas obtenidas agrupando}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} los primeros elementos, los segundos, ... de forma que las longitudes}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} de las lista del resultado sean iguales a la más corta de xss. Por}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ejemplo, }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    agrupa [[1..6],[7..9],[10..20]]  ==  [[1,7,10],[2,8,11],[3,9,12]]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    agrupa []                        ==  []}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{agrupa} \PYG{o+ow}{::} \PYG{k+kt}{Eq} \PYG{n}{a} \PYG{o+ow}{=\PYGZgt{}} \PYG{p}{[[}\PYG{n}{a}\PYG{p}{]]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[[}\PYG{n}{a}\PYG{p}{]]}
+\PYG{n+nf}{agrupa} \PYG{k+kt}{[]}  \PYG{o+ow}{=} \PYG{k+kt}{[]}
+\PYG{n+nf}{agrupa} \PYG{n}{xss}
+    \PYG{o}{|} \PYG{k+kt}{[]} \PYG{p}{`}\PYG{n}{elem}\PYG{p}{`} \PYG{n}{xss} \PYG{o+ow}{=} \PYG{k+kt}{[]}
+    \PYG{o}{|} \PYG{n}{otherwise}     \PYG{o+ow}{=} \PYG{n}{primeros} \PYG{n}{xss} \PYG{k+kt}{:} \PYG{n}{agrupa} \PYG{p}{(}\PYG{n}{restos} \PYG{n}{xss}\PYG{p}{)}
+    \PYG{k+kr}{where} \PYG{n}{primeros} \PYG{o+ow}{=} \PYG{n}{map} \PYG{n}{head}
+          \PYG{n}{restos}   \PYG{o+ow}{=} \PYG{n}{map} \PYG{n}{tail}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 4. [Basado en el problema 341 del proyecto Euler]. La}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} sucesión de Golomb \PYGZob{}G(n)\PYGZcb{} es una sucesión auto descriptiva: es la}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} única sucesión no decreciente de números naturales tal que el número}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} n aparece G(n) veces en la sucesión. Los valores de G(n) para los}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} primeros números son los siguientes:}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    n       1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 ...}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    G(n)    1 2 2 3 3 4 4 4 5  5  5  6  6  6  6 ...}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} En los apartados de este ejercicio se definirá una función para}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} calcular los términos de la sucesión de Golomb. }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 4.1. Definir la función}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    golomb :: Int \PYGZhy{}\PYGZgt{} Int}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (golomb n) es el n\PYGZhy{}ésimo término de la sucesión de Golomb. }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    golomb 5  ==  3}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    golomb 9  ==  5}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Indicación: Se puede usar la función sucGolomb del apartado 2.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{golomb} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int}
+\PYG{n+nf}{golomb} \PYG{n}{n} \PYG{o+ow}{=} \PYG{n}{sucGolomb} \PYG{o}{!!} \PYG{p}{(}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 4.2. Definir la función}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sucGolomb :: [Int]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que sucGolomb es la lista de los términos de la sucesión de}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Golomb. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    take 15 sucGolomb  ==  [1,2,2,3,3,4,4,4,5,5,5,6,6,6,6]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Indicación: Se puede usar la función subSucGolomb del apartado 3.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{sucGolomb} \PYG{o+ow}{::} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]}
+\PYG{n+nf}{sucGolomb} \PYG{o+ow}{=} \PYG{n}{subSucGolomb} \PYG{l+m+mi}{1}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 4.3. Definir la función}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    subSucGolomb :: Int \PYGZhy{}\PYGZgt{} [Int]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (subSucGolomb x) es la lista de los términos de la sucesión}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} de Golomb a partir de la primera ocurrencia de x. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    take 10 (subSucGolomb 4)  ==  [4,4,4,5,5,5,6,6,6,6]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Indicación: Se puede usar la función golomb del apartado 1.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{subSucGolomb} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]}
+\PYG{n+nf}{subSucGolomb} \PYG{l+m+mi}{1} \PYG{o+ow}{=} \PYG{l+m+mi}{1} \PYG{k+kt}{:} \PYG{n}{subSucGolomb} \PYG{l+m+mi}{2}
+\PYG{n+nf}{subSucGolomb} \PYG{l+m+mi}{2} \PYG{o+ow}{=} \PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{]} \PYG{o}{++} \PYG{n}{subSucGolomb} \PYG{l+m+mi}{3}
+\PYG{n+nf}{subSucGolomb} \PYG{n}{x} \PYG{o+ow}{=} \PYG{n}{replicate} \PYG{p}{(}\PYG{n}{golomb} \PYG{n}{x}\PYG{p}{)} \PYG{n}{x} \PYG{o}{++} \PYG{n}{subSucGolomb} \PYG{p}{(}\PYG{n}{x}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)} 
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Nota: La sucesión de Golomb puede definirse de forma más compacta}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} como se muestra a continuación.}
+\PYG{n+nf}{sucGolomb\PYGZsq{}} \PYG{o+ow}{::} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]}
+\PYG{n+nf}{sucGolomb\PYGZsq{}} \PYG{o+ow}{=} \PYG{l+m+mi}{1} \PYG{k+kt}{:} \PYG{l+m+mi}{2} \PYG{k+kt}{:} \PYG{l+m+mi}{2} \PYG{k+kt}{:} \PYG{n}{g} \PYG{l+m+mi}{3}
+    \PYG{k+kr}{where} \PYG{n}{g} \PYG{n}{x}      \PYG{o+ow}{=} \PYG{n}{replicate} \PYG{p}{(}\PYG{n}{golomb} \PYG{n}{x}\PYG{p}{)} \PYG{n}{x} \PYG{o}{++} \PYG{n}{g} \PYG{p}{(}\PYG{n}{x}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)} 
+          \PYG{n}{golomb} \PYG{n}{n} \PYG{o+ow}{=} \PYG{n}{sucGolomb} \PYG{o}{!!} \PYG{p}{(}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)}
+\end{Verbatim}

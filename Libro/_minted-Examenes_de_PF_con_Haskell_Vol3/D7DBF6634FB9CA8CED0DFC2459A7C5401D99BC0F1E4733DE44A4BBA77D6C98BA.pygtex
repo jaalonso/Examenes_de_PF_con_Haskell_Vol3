@@ -1,0 +1,166 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Informática (1º del Grado en Matemáticas, Grupo 4)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 7º examen de evaluación continua (11 de junio de 2012)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{k+kr}{import} \PYG{n+nn}{Data.List}
+\PYG{k+kr}{import} \PYG{n+nn}{Data.Array}
+\PYG{k+kr}{import} \PYG{n+nn}{Test.QuickCheck}
+\PYG{k+kr}{import} \PYG{n+nn}{PolRepTDA}
+\PYG{k+kr}{import} \PYG{n+nn}{GrafoConVectorDeAdyacencia}
+\PYG{k+kr}{import} \PYG{n+nn}{ConjuntoConListasOrdenadasSinDuplicados}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 1. Diremos que una lista de números es una reducción}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} general de un número entero N si el sumatorio de L es igual a N y,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} además, L es una lista de números enteros consecutivos y ascendente,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} con más de un elemento. Por ejemplo, las listas [1,2,3,4,5], [4,5,6]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} y [7,8] son reducciones generales de 15 }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Definir, por comprensión, la función}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    reduccionesBasicas :: Integer \PYGZhy{}\PYGZgt{} [[Integer]]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (reduccionesBasicas n) es la lista de reducciones de n cuya}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} longitud (número de elementos) sea menor o igual que la raíz cuadrada}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} de n. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    reduccionesBasicas 15   ==  [[4,5,6],[7,8]]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    reduccionesBasicas 232  ==  []}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 1ª definición:}
+\PYG{n+nf}{reduccionesBasicasC} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[[}\PYG{k+kt}{Integer}\PYG{p}{]]}
+\PYG{n+nf}{reduccionesBasicasC} \PYG{n}{n} \PYG{o+ow}{=} 
+    \PYG{p}{[[}\PYG{n}{i}\PYG{o}{..}\PYG{n}{j}\PYG{p}{]} \PYG{o}{|} \PYG{n}{i} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{],} \PYG{n}{j} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{[}\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{n}{i}\PYG{o}{+}\PYG{n}{r}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{],} \PYG{n}{sum} \PYG{p}{[}\PYG{n}{i}\PYG{o}{..}\PYG{n}{j}\PYG{p}{]} \PYG{o}{==} \PYG{n}{n}\PYG{p}{]}
+    \PYG{k+kr}{where} \PYG{n}{r} \PYG{o+ow}{=} \PYG{n}{truncate} \PYG{p}{(}\PYG{n}{sqrt} \PYG{p}{(}\PYG{n}{fromIntegral} \PYG{n}{n}\PYG{p}{))}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 2ª definición:}
+\PYG{n+nf}{reduccionesBasicasC2} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[[}\PYG{k+kt}{Integer}\PYG{p}{]]}
+\PYG{n+nf}{reduccionesBasicasC2} \PYG{n}{n} \PYG{o+ow}{=} 
+    \PYG{p}{[[}\PYG{n}{i}\PYG{o}{..}\PYG{n}{j}\PYG{p}{]} \PYG{o}{|} \PYG{n}{i} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{],} \PYG{n}{j} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{[}\PYG{n}{i}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{n}{i}\PYG{o}{+}\PYG{n}{r}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{],} \PYG{p}{(}\PYG{n}{i}\PYG{o}{+}\PYG{n}{j}\PYG{p}{)}\PYG{o}{*}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{o}{+}\PYG{n}{j}\PYG{o}{\PYGZhy{}}\PYG{n}{i}\PYG{p}{)} \PYG{p}{`}\PYG{n}{div}\PYG{p}{`} \PYG{l+m+mi}{2} \PYG{o}{==} \PYG{n}{n}\PYG{p}{]}
+    \PYG{k+kr}{where} \PYG{n}{r} \PYG{o+ow}{=} \PYG{n}{truncate} \PYG{p}{(}\PYG{n}{sqrt} \PYG{p}{(}\PYG{n}{fromIntegral} \PYG{n}{n}\PYG{p}{))}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 2. Dada una matriz numérica A de dimensiones (m,n) y una}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} matriz booleana B de las mismas dimensiones, y dos funciones f y g,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} la transformada de A respecto de B, f y g es la matriz C (de las}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} mismas dimensiones), tal que, para cada celda (i,j): }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    C(i,j) = f(A(i,j)) si B(i,j) es verdadero}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    C(i,j) = f(A(i,j)) si B(i,j) es falso}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Por ejemplo, si A y B son las matrices}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    |1 2|   |True  False|  }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    |3 4|   |False True |}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} respectivamente, y f y g son dos funciones tales que f(x) = x+1 y}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} g(x) = 2*x, entonces la transformada de A respecto de B, f y g es}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    |2 4|}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    |6 5|}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} En Haskell,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    a :: Array (Int,Int) Int}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    a = array ((1,1),(2,2)) [((1,1),1),((1,2),2),((2,1),3),((2,2),4)]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    b :: Array (Int,Int) Bool}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    b = array ((1,1),(2,2)) [((1,1),True),((1,2),False),((2,1),False),((2,2),True)]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}     }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Definir la función}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    transformada :: Array (Int,Int) a \PYGZhy{}\PYGZgt{} Array (Int,Int) Bool \PYGZhy{}\PYGZgt{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                    (a \PYGZhy{}\PYGZgt{} b) \PYGZhy{}\PYGZgt{} (a \PYGZhy{}\PYGZgt{} b) \PYGZhy{}\PYGZgt{} Array (Int,Int) b}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (transformada a b f g) es la transformada de A respecto de B,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} f y g. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    ghci\PYGZgt{} transformada a b (+1) (*2)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    array ((1,1),(2,2)) [((1,1),2),((1,2),4),((2,1),6),((2,2),5)]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{a} \PYG{o+ow}{::} \PYG{k+kt}{Array} \PYG{p}{(}\PYG{k+kt}{Int}\PYG{p}{,}\PYG{k+kt}{Int}\PYG{p}{)} \PYG{k+kt}{Int}
+\PYG{n+nf}{a} \PYG{o+ow}{=} \PYG{n}{array} \PYG{p}{((}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{),(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{))} \PYG{p}{[((}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{l+m+mi}{1}\PYG{p}{),((}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{),}\PYG{l+m+mi}{2}\PYG{p}{),((}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{l+m+mi}{3}\PYG{p}{),((}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{),}\PYG{l+m+mi}{4}\PYG{p}{)]}
+
+\PYG{n+nf}{b} \PYG{o+ow}{::} \PYG{k+kt}{Array} \PYG{p}{(}\PYG{k+kt}{Int}\PYG{p}{,}\PYG{k+kt}{Int}\PYG{p}{)} \PYG{k+kt}{Bool}
+\PYG{n+nf}{b} \PYG{o+ow}{=} \PYG{n}{array} \PYG{p}{((}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{),(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{))} \PYG{p}{[((}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{k+kt}{True}\PYG{p}{),((}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{),}\PYG{k+kt}{False}\PYG{p}{),((}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{),}\PYG{k+kt}{False}\PYG{p}{),((}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{),}\PYG{k+kt}{True}\PYG{p}{)]}
+
+\PYG{n+nf}{transformada} \PYG{o+ow}{::} \PYG{k+kt}{Array} \PYG{p}{(}\PYG{k+kt}{Int}\PYG{p}{,}\PYG{k+kt}{Int}\PYG{p}{)} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Array} \PYG{p}{(}\PYG{k+kt}{Int}\PYG{p}{,}\PYG{k+kt}{Int}\PYG{p}{)} \PYG{k+kt}{Bool} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} 
+                \PYG{p}{(}\PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{b}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{(}\PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{b}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Array} \PYG{p}{(}\PYG{k+kt}{Int}\PYG{p}{,}\PYG{k+kt}{Int}\PYG{p}{)} \PYG{n}{b}
+\PYG{n+nf}{transformada} \PYG{n}{a} \PYG{n}{b} \PYG{n}{f} \PYG{n}{g} \PYG{o+ow}{=} 
+    \PYG{n}{array} \PYG{p}{((}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{),(}\PYG{n}{m}\PYG{p}{,}\PYG{n}{n}\PYG{p}{))} \PYG{p}{[((}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{),}\PYG{n}{aplica} \PYG{n}{i} \PYG{n}{j}\PYG{p}{)} \PYG{o}{|} \PYG{n}{i} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{n}{m}\PYG{p}{],} \PYG{n}{j} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{n}{m}\PYG{p}{]]}
+    \PYG{k+kr}{where} \PYG{p}{(}\PYG{n}{m}\PYG{p}{,}\PYG{n}{n}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{snd} \PYG{p}{(}\PYG{n}{bounds} \PYG{n}{a}\PYG{p}{)}
+          \PYG{n}{aplica} \PYG{n}{i} \PYG{n}{j} \PYG{o}{|} \PYG{n}{b}\PYG{o}{!}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{)}   \PYG{o+ow}{=} \PYG{n}{f} \PYG{p}{(}\PYG{n}{a}\PYG{o}{!}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{))}
+                     \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{n}{g} \PYG{p}{(}\PYG{n}{a}\PYG{o}{!}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,}\PYG{n}{j}\PYG{p}{))}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 3. Dado un grafo dirigido G, diremos que un nodo está}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} aislado si o bien de dicho nodo no sale ninguna arista o bien no}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} llega al nodo ninguna arista. Por ejemplo, en el siguiente grafo}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (Tema 22, pag. 31) }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    g = creaGrafo D (1,6) [(1,2,0),(1,3,0),(1,4,0),(3,6,0),}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                           (5,4,0),(6,2,0),(6,5,0)]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} podemos ver que del nodo 1 salen 3 aristas pero no llega ninguna, por}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} lo que lo consideramos aislado. Así mismo, a los nodos 2 y 4 llegan}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} aristas pero no sale ninguna, por tanto también estarán aislados.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Definir la función }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    aislados :: (Ix v, Num p) =\PYGZgt{} Grafo v p \PYGZhy{}\PYGZgt{} [v]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (aislados g) es la lista de nodos aislados del grafo g. Por}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ejemplo, }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    aislados g == [1,2,4]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+                    
+\PYG{n+nf}{g} \PYG{o+ow}{=} \PYG{n}{creaGrafo} \PYG{k+kt}{D} \PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{6}\PYG{p}{)} \PYG{p}{[(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{),(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{),(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{),(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{),}
+                       \PYG{p}{(}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{),(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{),(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{l+m+mi}{0}\PYG{p}{)]}
+    
+\PYG{n+nf}{aislados} \PYG{o+ow}{::} \PYG{p}{(}\PYG{k+kt}{Ix} \PYG{n}{v}\PYG{p}{,} \PYG{k+kt}{Num} \PYG{n}{p}\PYG{p}{)} \PYG{o+ow}{=\PYGZgt{}} \PYG{k+kt}{Grafo} \PYG{n}{v} \PYG{n}{p} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{n}{v}\PYG{p}{]}
+\PYG{n+nf}{aislados} \PYG{n}{g} \PYG{o+ow}{=} \PYG{p}{[}\PYG{n}{n} \PYG{o}{|} \PYG{n}{n} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{nodos} \PYG{n}{g}\PYG{p}{,} \PYG{n}{adyacentes} \PYG{n}{g} \PYG{n}{n} \PYG{o}{==} \PYG{k+kt}{[]} \PYG{o}{||} \PYG{n}{incidentes} \PYG{n}{g} \PYG{n}{n} \PYG{o}{==} \PYG{k+kt}{[]} \PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (incidentes g v) es la lista de los nodos incidentes con v en el}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} grafo g. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    incidentes g 2  ==  [1,6]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    incidentes g 1  ==  []}
+\PYG{n+nf}{incidentes} \PYG{o+ow}{::} \PYG{p}{(}\PYG{k+kt}{Ix} \PYG{n}{v}\PYG{p}{,}\PYG{k+kt}{Num} \PYG{n}{p}\PYG{p}{)} \PYG{o+ow}{=\PYGZgt{}} \PYG{k+kt}{Grafo} \PYG{n}{v} \PYG{n}{p} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{v} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{n}{v}\PYG{p}{]}
+\PYG{n+nf}{incidentes} \PYG{n}{g} \PYG{n}{v} \PYG{o+ow}{=} \PYG{p}{[}\PYG{n}{x} \PYG{o}{|} \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{nodos} \PYG{n}{g}\PYG{p}{,} \PYG{n}{v} \PYG{p}{`}\PYG{n}{elem}\PYG{p}{`} \PYG{n}{adyacentes} \PYG{n}{g} \PYG{n}{x}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 4. Definir la función}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    gradosCoeficientes :: (Ord a, Num a) =\PYGZgt{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                          [Polinomio a] \PYGZhy{}\PYGZgt{} [(Int,Conj a)]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (gradosCoeficientes ps) es una lista de pares, donde cada par}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} de la lista contendrá como primer elemento un número entero}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (correspondiente a un grado) y el segundo elemento será un conjunto}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} que contendrá todos los coeficientes distintos de 0 que aparecen para}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} dicho grado en la lista de polinomios ps. Esta lista estará }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ordenada de menor a mayor para todos los grados posibles de la lista de }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} polinomios. Por ejemplo, dados los siguientes polinomios}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    p1, p2, p3, p4 :: Polinomio Int}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    p1 = consPol 5 2 (consPol 3 (\PYGZhy{}1) polCero)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    p2 = consPol 7 (\PYGZhy{}2) (consPol 5 1 (consPol 4 5 (consPol 2 1 polCero)))}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    p3 = polCero}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    p4 = consPol 4 (\PYGZhy{}1) (consPol 3 2 (consPol 1 1 polCero))}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} se tiene que}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    ghci\PYGZgt{} gradosCoeficientes [p1,p2,p3,p4]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    [(1,\PYGZob{}0,1\PYGZcb{}),(2,\PYGZob{}0,1\PYGZcb{}),(3,\PYGZob{}\PYGZhy{}1,0,2\PYGZcb{}),(4,\PYGZob{}\PYGZhy{}1,0,5\PYGZcb{}),(5,\PYGZob{}0,1,2\PYGZcb{}),}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}     (6,\PYGZob{}0\PYGZcb{}),(7,\PYGZob{}\PYGZhy{}2,0\PYGZcb{})]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{p1}\PYG{p}{,} \PYG{n}{p2}\PYG{p}{,} \PYG{n}{p3}\PYG{p}{,} \PYG{n}{p4} \PYG{o+ow}{::} \PYG{k+kt}{Polinomio} \PYG{k+kt}{Int}
+\PYG{n+nf}{p1} \PYG{o+ow}{=} \PYG{n}{consPol} \PYG{l+m+mi}{5} \PYG{l+m+mi}{2} \PYG{p}{(}\PYG{n}{consPol} \PYG{l+m+mi}{3} \PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{n}{polCero}\PYG{p}{)}
+\PYG{n+nf}{p2} \PYG{o+ow}{=} \PYG{n}{consPol} \PYG{l+m+mi}{7} \PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{2}\PYG{p}{)} \PYG{p}{(}\PYG{n}{consPol} \PYG{l+m+mi}{5} \PYG{l+m+mi}{1} \PYG{p}{(}\PYG{n}{consPol} \PYG{l+m+mi}{4} \PYG{l+m+mi}{5} \PYG{p}{(}\PYG{n}{consPol} \PYG{l+m+mi}{2} \PYG{l+m+mi}{1} \PYG{n}{polCero}\PYG{p}{)))}
+\PYG{n+nf}{p3} \PYG{o+ow}{=} \PYG{n}{polCero}
+\PYG{n+nf}{p4} \PYG{o+ow}{=} \PYG{n}{consPol} \PYG{l+m+mi}{4} \PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{(}\PYG{n}{consPol} \PYG{l+m+mi}{3} \PYG{l+m+mi}{2} \PYG{p}{(}\PYG{n}{consPol} \PYG{l+m+mi}{1} \PYG{l+m+mi}{1} \PYG{n}{polCero}\PYG{p}{))}
+
+\PYG{n+nf}{gradosCoeficientes} \PYG{o+ow}{::} \PYG{p}{(}\PYG{k+kt}{Ord} \PYG{n}{a}\PYG{p}{,} \PYG{k+kt}{Num} \PYG{n}{a}\PYG{p}{)} \PYG{o+ow}{=\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Polinomio} \PYG{n}{a}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[(}\PYG{k+kt}{Int}\PYG{p}{,}\PYG{k+kt}{Conj} \PYG{n}{a}\PYG{p}{)]}
+\PYG{n+nf}{gradosCoeficientes} \PYG{n}{ps} \PYG{o+ow}{=} 
+    \PYG{p}{[(}\PYG{n}{k}\PYG{p}{,}\PYG{n}{foldr} \PYG{p}{(}\PYG{n}{inserta} \PYG{o}{.} \PYG{n}{coeficiente} \PYG{n}{k}\PYG{p}{)} \PYG{n}{vacio} \PYG{n}{ps}\PYG{p}{)} \PYG{o}{|} \PYG{n}{k} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{n}{m}\PYG{p}{]]}
+    \PYG{k+kr}{where} \PYG{n}{m} \PYG{o+ow}{=} \PYG{n}{maximum} \PYG{p}{(}\PYG{n}{map} \PYG{n}{grado} \PYG{n}{ps}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (coeficiente k p) es el coeficiente del término de grado k}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} del polinomio p. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    let pol = consPol 5 2 (consPol 3 1 (consPol 0 (\PYGZhy{}1) polCero))}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    pol                ==  2*x\PYGZca{}5 + x\PYGZca{}3 + \PYGZhy{}1}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    coeficiente 5 pol  ==  2}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    coeficiente 6 pol  ==  0}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    coeficiente 4 pol  ==  0}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    coeficiente 3 pol  ==  1}
+\PYG{n+nf}{coeficiente} \PYG{o+ow}{::} \PYG{k+kt}{Num} \PYG{n}{a} \PYG{o+ow}{=\PYGZgt{}} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Polinomio} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{a}
+\PYG{n+nf}{coeficiente} \PYG{n}{k} \PYG{n}{p} \PYG{o}{|} \PYG{n}{k} \PYG{o}{\PYGZgt{}} \PYG{n}{n}     \PYG{o+ow}{=} \PYG{l+m+mi}{0}
+                \PYG{o}{|} \PYG{n}{k} \PYG{o}{==} \PYG{n}{n}    \PYG{o+ow}{=} \PYG{n}{c}
+                \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{n}{coeficiente} \PYG{n}{k} \PYG{n}{r}
+                \PYG{k+kr}{where} \PYG{n}{n} \PYG{o+ow}{=} \PYG{n}{grado} \PYG{n}{p}
+                      \PYG{n}{c} \PYG{o+ow}{=} \PYG{n}{coefLider} \PYG{n}{p}
+                      \PYG{n}{r} \PYG{o+ow}{=} \PYG{n}{restoPol} \PYG{n}{p}
+                      
+\end{Verbatim}

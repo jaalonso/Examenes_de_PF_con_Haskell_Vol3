@@ -1,0 +1,131 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Informática (1º del Grado en Matemáticas, Grupo 1)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 4º examen de evaluación continua (29 de febrero de 2012)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 1. [2.5 puntos] En el enunciado de uno de los problemas de}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} las Olimpiadas matemáticas de Brasil se define el primitivo de un}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} número como sigue:}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    Dado un número natural N, multiplicamos todos sus dígitos,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    repetimos este procedimiento hasta que quede un solo dígito al}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    cual llamamos primitivo de N. Por ejemplo para 327: 3x2x7 = 42 y }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    4x2 = 8. Por lo tanto, el primitivo de 327 es 8.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Definir la función }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    primitivo :: Integer \PYGZhy{}\PYGZgt{} Integer}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (primitivo n) es el primitivo de n. Por ejemplo.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    primitivo 327  ==  8}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{primitivo} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer}
+\PYG{n+nf}{primitivo} \PYG{n}{n} \PYG{o}{|} \PYG{n}{n} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{10}    \PYG{o+ow}{=} \PYG{n}{n}
+            \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{n}{primitivo} \PYG{p}{(}\PYG{n}{producto} \PYG{n}{n}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (producto n) es el producto de las cifras de n. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    producto 327  ==  42}
+\PYG{n+nf}{producto} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer}
+\PYG{n+nf}{producto} \PYG{o+ow}{=} \PYG{n}{product} \PYG{o}{.} \PYG{n}{cifras}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (cifras n) es la lista de las cifras de n. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    cifras 327  ==  [3,2,7]}
+\PYG{n+nf}{cifras} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Integer}\PYG{p}{]}
+\PYG{n+nf}{cifras} \PYG{n}{n} \PYG{o+ow}{=} \PYG{p}{[}\PYG{n}{read} \PYG{p}{[}\PYG{n}{y}\PYG{p}{]} \PYG{o}{|} \PYG{n}{y} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{show} \PYG{n}{n}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 2. [2.5 puntos] Definir la función}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumas :: Int \PYGZhy{}\PYGZgt{} [Int] \PYGZhy{}\PYGZgt{} [Int]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (sumas n xs) es la lista de los números que se pueden obtener}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} como suma de n, o menos, elementos de xs. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumas 0 [2,5]    ==  [0]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumas 1 [2,5]    ==  [2,5,0]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumas 2 [2,5]    ==  [4,7,2,10,5,0]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumas 3 [2,5]    ==  [6,9,4,12,7,2,15,10,5,0]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumas 2 [2,3,5]  ==  [4,5,7,2,6,8,3,10,5,0]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{sumas} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]}
+\PYG{n+nf}{sumas} \PYG{l+m+mi}{0} \PYG{k+kr}{\PYGZus{}}  \PYG{o+ow}{=} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}
+\PYG{n+nf}{sumas} \PYG{k+kr}{\PYGZus{}} \PYG{k+kt}{[]} \PYG{o+ow}{=} \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}  
+\PYG{n+nf}{sumas} \PYG{n}{n} \PYG{p}{(}\PYG{n}{x}\PYG{k+kt}{:}\PYG{n}{xs}\PYG{p}{)} \PYG{o+ow}{=} \PYG{p}{[}\PYG{n}{x}\PYG{o}{+}\PYG{n}{y} \PYG{o}{|} \PYG{n}{y} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{sumas} \PYG{p}{(}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{(}\PYG{n}{x}\PYG{k+kt}{:}\PYG{n}{xs}\PYG{p}{)]} \PYG{o}{++} \PYG{n}{sumas} \PYG{n}{n} \PYG{n}{xs} 
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 3. [2.5 puntos] Los árboles binarios se pueden representar}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} mediante el siguiente tipo de datos}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    data Arbol = H  }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}               | N Int Arbol Arbol}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Por ejemplo, el árbol}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}            9}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}           / \PYGZbs{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}          /   \PYGZbs{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}         3     7   }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}        / \PYGZbs{}   / \PYGZbs{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}       /   \PYGZbs{} H   H}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}      2     4   }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}     / \PYGZbs{}   / \PYGZbs{}  }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    H   H H   H}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} se representa por}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    N 9 (N 3 (N 2 H H) (N 4 H H)) (N 7 H H)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Definir la función}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    ramaIzquierda :: Arbol \PYGZhy{}\PYGZgt{} [Int]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (ramaIzquierda a) es la lista de los valores de los nodos de}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} la rama izquierda del árbol a. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    ghci\PYGZgt{} ramaIzquierda (N 9 (N 3 (N 2 H H) (N 4 H H)) (N 7 H H))}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    [9,3,2]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{k+kr}{data} \PYG{k+kt}{Arbol} \PYG{o+ow}{=} \PYG{k+kt}{H}  
+           \PYG{o}{|} \PYG{k+kt}{N} \PYG{k+kt}{Int} \PYG{k+kt}{Arbol} \PYG{k+kt}{Arbol}
+
+\PYG{n+nf}{ramaIzquierda} \PYG{o+ow}{::} \PYG{k+kt}{Arbol} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]}
+\PYG{n+nf}{ramaIzquierda} \PYG{k+kt}{H}         \PYG{o+ow}{=} \PYG{k+kt}{[]}
+\PYG{n+nf}{ramaIzquierda} \PYG{p}{(}\PYG{k+kt}{N} \PYG{n}{x} \PYG{n}{i} \PYG{n}{d}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{x} \PYG{k+kt}{:} \PYG{n}{ramaIzquierda} \PYG{n}{i}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 4. [2.5 puntos] Un primo permutable es un número primo tal}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} que todos los números obtenidos permutando sus cifras son primos. Por}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ejemplo, 337 es un primo permutable ya que 337, 373 y 733 son}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} primos. }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Definir la función  }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    primoPermutable :: Integer \PYGZhy{}\PYGZgt{} Bool}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (primoPermutable x) se verifica si x es un primo}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} permutable. Por ejemplo, }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    primoPermutable 17  ==  True}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    primoPermutable 19  ==  False}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{primoPermutable} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}
+\PYG{n+nf}{primoPermutable} \PYG{n}{x} \PYG{o+ow}{=} \PYG{n}{and} \PYG{p}{[}\PYG{n}{primo} \PYG{n}{y} \PYG{o}{|} \PYG{n}{y} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{permutacionesN} \PYG{n}{x}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (permutacionesN x) es la lista de los números obtenidos permutando}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} las cifras de x. Por ejemplo,}
+\PYG{n+nf}{permutacionesN} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Integer}\PYG{p}{]}
+\PYG{n+nf}{permutacionesN} \PYG{n}{x} \PYG{o+ow}{=} \PYG{p}{[}\PYG{n}{read} \PYG{n}{ys} \PYG{o}{|} \PYG{n}{ys} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{permutaciones} \PYG{p}{(}\PYG{n}{show} \PYG{n}{x}\PYG{p}{)]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (intercala x ys) es la lista de las listas obtenidas intercalando x}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} entre los elementos de ys. Por ejemplo, }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    intercala 1 [2,3]  ==  [[1,2,3],[2,1,3],[2,3,1]]}
+\PYG{n+nf}{intercala} \PYG{o+ow}{::} \PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{n}{a}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[[}\PYG{n}{a}\PYG{p}{]]}
+\PYG{n+nf}{intercala} \PYG{n}{x} \PYG{k+kt}{[]} \PYG{o+ow}{=} \PYG{p}{[[}\PYG{n}{x}\PYG{p}{]]}
+\PYG{n+nf}{intercala} \PYG{n}{x} \PYG{p}{(}\PYG{n}{y}\PYG{k+kt}{:}\PYG{n}{ys}\PYG{p}{)} \PYG{o+ow}{=} \PYG{p}{(}\PYG{n}{x}\PYG{k+kt}{:}\PYG{n}{y}\PYG{k+kt}{:}\PYG{n}{ys}\PYG{p}{)} \PYG{k+kt}{:} \PYG{p}{[}\PYG{n}{y}\PYG{k+kt}{:}\PYG{n}{zs} \PYG{o}{|} \PYG{n}{zs} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{intercala} \PYG{n}{x} \PYG{n}{ys}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (permutaciones xs) es la lista de las permutaciones de la lista}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} xs. Por ejemplo, }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    permutaciones \PYGZdq{}bc\PYGZdq{}   ==  [\PYGZdq{}bc\PYGZdq{},\PYGZdq{}cb\PYGZdq{}]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    permutaciones \PYGZdq{}abc\PYGZdq{}  ==  [\PYGZdq{}abc\PYGZdq{},\PYGZdq{}bac\PYGZdq{},\PYGZdq{}bca\PYGZdq{},\PYGZdq{}acb\PYGZdq{},\PYGZdq{}cab\PYGZdq{},\PYGZdq{}cba\PYGZdq{}]}
+\PYG{n+nf}{permutaciones} \PYG{o+ow}{::} \PYG{p}{[}\PYG{n}{a}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[[}\PYG{n}{a}\PYG{p}{]]}
+\PYG{n+nf}{permutaciones} \PYG{k+kt}{[]}     \PYG{o+ow}{=} \PYG{p}{[}\PYG{k+kt}{[]}\PYG{p}{]}
+\PYG{n+nf}{permutaciones} \PYG{p}{(}\PYG{n}{x}\PYG{k+kt}{:}\PYG{n}{xs}\PYG{p}{)} \PYG{o+ow}{=} 
+    \PYG{n}{concat} \PYG{p}{[}\PYG{n}{intercala} \PYG{n}{x} \PYG{n}{ys} \PYG{o}{|} \PYG{n}{ys} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{permutaciones} \PYG{n}{xs}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (primo x) se verifica si x es primo.}
+\PYG{n+nf}{primo} \PYG{o+ow}{::} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}
+\PYG{n+nf}{primo} \PYG{n}{x} \PYG{o+ow}{=} \PYG{n}{x} \PYG{o}{==} \PYG{n}{head} \PYG{p}{(}\PYG{n}{dropWhile} \PYG{p}{(}\PYG{o}{\PYGZlt{}}\PYG{n}{x}\PYG{p}{)} \PYG{n}{primos}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} primos es la lista de los números primos. }
+\PYG{n+nf}{primos} \PYG{o+ow}{::} \PYG{p}{[}\PYG{k+kt}{Integer} \PYG{p}{]}
+\PYG{n+nf}{primos} \PYG{o+ow}{=} \PYG{n}{criba} \PYG{p}{[}\PYG{l+m+mi}{2}\PYG{o}{..}\PYG{p}{]}
+    \PYG{k+kr}{where} \PYG{n}{criba} \PYG{o+ow}{::} \PYG{p}{[}\PYG{k+kt}{Integer}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Integer}\PYG{p}{]}
+          \PYG{n}{criba} \PYG{p}{(}\PYG{n}{p}\PYG{k+kt}{:}\PYG{n}{xs}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{p} \PYG{k+kt}{:} \PYG{n}{criba} \PYG{p}{[}\PYG{n}{x} \PYG{o}{|} \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{xs}\PYG{p}{,} \PYG{n}{x} \PYG{p}{`}\PYG{n}{mod}\PYG{p}{`} \PYG{n}{p} \PYG{o}{/=} \PYG{l+m+mi}{0}\PYG{p}{]}
+\end{Verbatim}

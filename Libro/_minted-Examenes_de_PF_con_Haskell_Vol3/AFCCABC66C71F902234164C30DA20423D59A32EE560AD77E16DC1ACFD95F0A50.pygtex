@@ -1,0 +1,249 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Informática (1º del Grado en Matemáticas, Grupo 2)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 3º examen de evaluación continua (26 de enero de 2012)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{k+kr}{import} \PYG{n+nn}{Test.QuickCheck}
+\PYG{k+kr}{import} \PYG{n+nn}{Data.List}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 1.1. Definir la función}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumatorio :: (Integer \PYGZhy{}\PYGZgt{} Integer) \PYGZhy{}\PYGZgt{} Integer \PYGZhy{}\PYGZgt{} Integer \PYGZhy{}\PYGZgt{} Integer}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (sumatorio f m n) es la suma de f(x) desde x=m hasta x=n. Por}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ejemplo, }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumatorio (\PYGZca{}2) 5 10     == 355}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumatorio abs (\PYGZhy{}5) 10   == 70}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumatorio (\PYGZca{}2) 3 100000 == 333338333349995}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 1ª definición (por comprensión):}
+\PYG{n+nf}{sumatorioC} \PYG{o+ow}{::} \PYG{p}{(}\PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer}
+\PYG{n+nf}{sumatorioC} \PYG{n}{f} \PYG{n}{m} \PYG{n}{n} \PYG{o+ow}{=} \PYG{n}{sum} \PYG{p}{[}\PYG{n}{f} \PYG{n}{x} \PYG{o}{|} \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{[}\PYG{n}{m}\PYG{o}{..}\PYG{n}{n}\PYG{p}{]]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 2ª definición (por recursión):}
+\PYG{n+nf}{sumatorioR} \PYG{o+ow}{::} \PYG{p}{(}\PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Integer}
+\PYG{n+nf}{sumatorioR} \PYG{n}{f} \PYG{n}{m} \PYG{n}{n} \PYG{o+ow}{=} \PYG{n}{aux} \PYG{n}{m} \PYG{l+m+mi}{0}
+    \PYG{k+kr}{where} \PYG{n}{aux} \PYG{n}{k} \PYG{n}{ac} \PYG{o}{|} \PYG{n}{k} \PYG{o}{\PYGZgt{}} \PYG{n}{n}     \PYG{o+ow}{=} \PYG{n}{ac}
+                   \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{n}{aux} \PYG{p}{(}\PYG{n}{k}\PYG{o}{+}\PYG{l+m+mi}{1}\PYG{p}{)} \PYG{p}{(}\PYG{n}{ac} \PYG{o}{+} \PYG{n}{f} \PYG{n}{k}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 1.2. Definir la función }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumaPred :: Num a =\PYGZgt{} (a \PYGZhy{}\PYGZgt{} Bool) \PYGZhy{}\PYGZgt{} [a] \PYGZhy{}\PYGZgt{} a}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (sumaPred p xs) es la suma de los elementos de xs que}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} verifican el predicado p. Por ejemplo:}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumaPred even [1..1000]   == 250500 }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumaPred even [1..100000] == 2500050000          }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 1ª definición (por composición, usando funciones de orden superior):          }
+\PYG{n+nf}{sumaPred} \PYG{o+ow}{::} \PYG{k+kt}{Num} \PYG{n}{a} \PYG{o+ow}{=\PYGZgt{}} \PYG{p}{(}\PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{n}{a}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{a}
+\PYG{n+nf}{sumaPred} \PYG{n}{p} \PYG{o+ow}{=} \PYG{n}{sum} \PYG{o}{.} \PYG{n}{filter} \PYG{n}{p}
+          
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 2ª definición (por recursión):}
+\PYG{n+nf}{sumaPredR} \PYG{o+ow}{::} \PYG{k+kt}{Num} \PYG{n}{a} \PYG{o+ow}{=\PYGZgt{}} \PYG{p}{(}\PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{n}{a}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{a}
+\PYG{n+nf}{sumaPredR} \PYG{k+kr}{\PYGZus{}} \PYG{k+kt}{[]} \PYG{o+ow}{=} \PYG{l+m+mi}{0}
+\PYG{n+nf}{sumaPredR} \PYG{n}{p} \PYG{p}{(}\PYG{n}{x}\PYG{k+kt}{:}\PYG{n}{xs}\PYG{p}{)} \PYG{o}{|} \PYG{n}{p} \PYG{n}{x}       \PYG{o+ow}{=} \PYG{n}{x} \PYG{o}{+} \PYG{n}{sumaPredR} \PYG{n}{p} \PYG{n}{xs}
+                   \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{n}{sumaPredR} \PYG{n}{p} \PYG{n}{xs}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 3ª definición (por plegado por la derecha, usando foldr):                }
+\PYG{n+nf}{sumaPredPD} \PYG{o+ow}{::} \PYG{k+kt}{Num} \PYG{n}{a} \PYG{o+ow}{=\PYGZgt{}} \PYG{p}{(}\PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{n}{a}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{a}
+\PYG{n+nf}{sumaPredPD} \PYG{n}{p} \PYG{o+ow}{=} \PYG{n}{foldr} \PYG{n}{f} \PYG{l+m+mi}{0} 
+    \PYG{k+kr}{where} \PYG{n}{f} \PYG{n}{x} \PYG{n}{y} \PYG{o}{|} \PYG{n}{p} \PYG{n}{x}       \PYG{o+ow}{=} \PYG{n}{x} \PYG{o}{+} \PYG{n}{y}
+                \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{n}{y}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 4ª definición (por recursión final):}
+\PYG{n+nf}{sumaPredRF} \PYG{o+ow}{::} \PYG{k+kt}{Num} \PYG{n}{a} \PYG{o+ow}{=\PYGZgt{}} \PYG{p}{(}\PYG{n}{a} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}\PYG{p}{)} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{n}{a}\PYG{p}{]} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{n}{a}
+\PYG{n+nf}{sumaPredRF} \PYG{n}{p} \PYG{n}{xs} \PYG{o+ow}{=} \PYG{n}{aux} \PYG{n}{xs} \PYG{l+m+mi}{0}
+    \PYG{k+kr}{where} \PYG{n}{aux} \PYG{k+kt}{[]}     \PYG{n}{a} \PYG{o+ow}{=} \PYG{n}{a}
+          \PYG{n}{aux} \PYG{p}{(}\PYG{n}{x}\PYG{k+kt}{:}\PYG{n}{xs}\PYG{p}{)} \PYG{n}{a} \PYG{o}{|} \PYG{n}{p} \PYG{n}{x}       \PYG{o+ow}{=} \PYG{n}{aux} \PYG{n}{xs} \PYG{p}{(}\PYG{n}{x}\PYG{o}{+}\PYG{n}{a}\PYG{p}{)}
+                       \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{n}{aux} \PYG{n}{xs} \PYG{n}{a}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 5ª definición (por plegado por la izquierda, usando foldl):                }
+\PYG{n+nf}{sumaPredPI} \PYG{n}{p} \PYG{o+ow}{=} \PYG{n}{foldl} \PYG{n}{f} \PYG{l+m+mi}{0} 
+    \PYG{k+kr}{where} \PYG{n}{f} \PYG{n}{x} \PYG{n}{y} \PYG{o}{|} \PYG{n}{p} \PYG{n}{y}       \PYG{o+ow}{=} \PYG{n}{x} \PYG{o}{+} \PYG{n}{y}
+                \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{n}{x}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 2.1. Representamos una relación binaria sobre un conjunto}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} como un par formado por:}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}   * una lista, que representa al conjunto, y}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}   * una lista de pares, que forman la relación}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} En los ejemplos usaremos las siguientes relaciones}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    r1, r2, r3,r4 :: ([Int],[(Int, Int)])}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    r1 = ([1..9],[(1,3), (2,6), (8,9), (2,7)])}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    r2 = ([1..9],[(1,3), (2,6), (8,9), (3,7)])}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    r3 = ([1..9],[(1,3), (2,6), (6,2), (3,1), (4,4)])}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    r4 = ([1..3],[(1,1),(1,2),(1,3),(2,2),(2,3),(3,3)])}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Definir la función }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    reflexiva :: Eq a =\PYGZgt{} ([a],[(a,a)]) \PYGZhy{}\PYGZgt{} Bool}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (reflexiva r) se verifica si r es una relación reflexiva. Por}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ejemplo, }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    reflexiva r1 == False}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    reflexiva r4 == True}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{r1}\PYG{p}{,} \PYG{n}{r2}\PYG{p}{,} \PYG{n}{r3}\PYG{p}{,}\PYG{n}{r4} \PYG{o+ow}{::} \PYG{p}{([}\PYG{k+kt}{Int}\PYG{p}{],[(}\PYG{k+kt}{Int}\PYG{p}{,} \PYG{k+kt}{Int}\PYG{p}{)])}
+\PYG{n+nf}{r1} \PYG{o+ow}{=} \PYG{p}{([}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{l+m+mi}{9}\PYG{p}{],[(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{),} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{6}\PYG{p}{),} \PYG{p}{(}\PYG{l+m+mi}{8}\PYG{p}{,}\PYG{l+m+mi}{9}\PYG{p}{),} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{7}\PYG{p}{)])}
+\PYG{n+nf}{r2} \PYG{o+ow}{=} \PYG{p}{([}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{l+m+mi}{9}\PYG{p}{],[(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{),} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{6}\PYG{p}{),} \PYG{p}{(}\PYG{l+m+mi}{8}\PYG{p}{,}\PYG{l+m+mi}{9}\PYG{p}{),} \PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mi}{7}\PYG{p}{)])}
+\PYG{n+nf}{r3} \PYG{o+ow}{=} \PYG{p}{([}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{l+m+mi}{9}\PYG{p}{],[(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{),} \PYG{p}{(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{6}\PYG{p}{),} \PYG{p}{(}\PYG{l+m+mi}{6}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{),} \PYG{p}{(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{),} \PYG{p}{(}\PYG{l+m+mi}{4}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{)])}
+\PYG{n+nf}{r4} \PYG{o+ow}{=} \PYG{p}{([}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{l+m+mi}{3}\PYG{p}{],[(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{1}\PYG{p}{),(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{),(}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{),(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{2}\PYG{p}{),(}\PYG{l+m+mi}{2}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{),(}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{l+m+mi}{3}\PYG{p}{)])}
+
+\PYG{n+nf}{reflexiva} \PYG{o+ow}{::} \PYG{k+kt}{Eq} \PYG{n}{a} \PYG{o+ow}{=\PYGZgt{}} \PYG{p}{([}\PYG{n}{a}\PYG{p}{],[(}\PYG{n}{a}\PYG{p}{,}\PYG{n}{a}\PYG{p}{)])} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}
+\PYG{n+nf}{reflexiva} \PYG{p}{(}\PYG{n}{us}\PYG{p}{,}\PYG{n}{ps}\PYG{p}{)} \PYG{o+ow}{=} \PYG{n}{and} \PYG{p}{[(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{x}\PYG{p}{)} \PYG{p}{`}\PYG{n}{elem}\PYG{p}{`} \PYG{n}{ps} \PYG{o}{|} \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{us}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 2.2. Definir la función }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    simetrica :: Eq a =\PYGZgt{} ([a],[(a,a)]) \PYGZhy{}\PYGZgt{} Bool}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (simetrica r) se verifica si r es una relación simétrica. Por}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ejemplo, }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    simetrica r1 == False}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    simetrica r3 == True}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 1ª definición (por comprensión):}
+\PYG{n+nf}{simetricaC} \PYG{o+ow}{::} \PYG{k+kt}{Eq} \PYG{n}{a} \PYG{o+ow}{=\PYGZgt{}} \PYG{p}{([}\PYG{n}{a}\PYG{p}{],[(}\PYG{n}{a}\PYG{p}{,}\PYG{n}{a}\PYG{p}{)])} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}
+\PYG{n+nf}{simetricaC} \PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{r}\PYG{p}{)} \PYG{o+ow}{=}
+    \PYG{n}{null} \PYG{p}{[(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{)} \PYG{o}{|} \PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{)} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{n}{r}\PYG{p}{,} \PYG{p}{(}\PYG{n}{y}\PYG{p}{,}\PYG{n}{x}\PYG{p}{)} \PYG{p}{`}\PYG{n}{notElem}\PYG{p}{`} \PYG{n}{r}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 2ª definición (por recursión):}
+\PYG{n+nf}{simetrica} \PYG{o+ow}{::} \PYG{k+kt}{Eq} \PYG{n}{a} \PYG{o+ow}{=\PYGZgt{}} \PYG{p}{([}\PYG{n}{a}\PYG{p}{],[(}\PYG{n}{a}\PYG{p}{,}\PYG{n}{a}\PYG{p}{)])} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}
+\PYG{n+nf}{simetrica} \PYG{n}{r} \PYG{o+ow}{=} \PYG{n}{aux} \PYG{p}{(}\PYG{n}{snd} \PYG{n}{r}\PYG{p}{)}
+    \PYG{k+kr}{where} \PYG{n}{aux} \PYG{k+kt}{[]} \PYG{o+ow}{=} \PYG{k+kt}{True}
+          \PYG{n}{aux} \PYG{p}{((}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{)}\PYG{k+kt}{:}\PYG{n}{s}\PYG{p}{)} \PYG{o}{|} \PYG{n}{x} \PYG{o}{==} \PYG{n}{y}    \PYG{o+ow}{=} \PYG{n}{aux} \PYG{n}{s}
+                        \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{n}{elem} \PYG{p}{(}\PYG{n}{y}\PYG{p}{,}\PYG{n}{x}\PYG{p}{)} \PYG{n}{s} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{aux} \PYG{p}{(}\PYG{n}{delete} \PYG{p}{(}\PYG{n}{y}\PYG{p}{,}\PYG{n}{x}\PYG{p}{)} \PYG{n}{s}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 3. (Problema 347 del proyecto Euler) El mayor entero menor}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} o igual que 100 que sólo es divisible por los primos 2 y 3, y sólo}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} por ellos, es 96, pues 96 = 3*32 = 3*2\PYGZca{}5.  }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Dados dos primos distintos p y q, sea M(p,q,n) el mayor entero menor}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} o igual que n sólo divisible por ambos p y q; o M(p,q,N)=0 si tal}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} entero no existe. Por ejemplo:}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    M(2,3,100)  = 96}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    M(3,5,100)  = 75 y no es 90 porque 90 es divisible por 2, 3 y 5}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                     y tampoco es 81 porque no es divisible por 5.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    M(2,73,100) = 0 porque no existe un entero menor o igual que 100 que}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}                    sea divisible por 2 y por 73.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Definir la función }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    mayorSoloDiv :: Int \PYGZhy{}\PYGZgt{} Int \PYGZhy{}\PYGZgt{} Int \PYGZhy{}\PYGZgt{} Int}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (mayorSoloDiv p q n) es M(p,q,n). Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    mayorSoloDiv 2 3 100  == 96}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    mayorSoloDiv 3 5 100  == 75}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    mayorSoloDiv 2 73 100 == 0}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 1ª solución}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ===========}
+
+\PYG{n+nf}{mayorSoloDiv} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int}
+\PYG{n+nf}{mayorSoloDiv} \PYG{n}{p} \PYG{n}{q} \PYG{n}{n} 
+    \PYG{o}{|} \PYG{n}{null} \PYG{n}{xs}   \PYG{o+ow}{=} \PYG{l+m+mi}{0}
+    \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{n}{head} \PYG{n}{xs}
+    \PYG{k+kr}{where} \PYG{n}{xs} \PYG{o+ow}{=} \PYG{p}{[}\PYG{n}{x} \PYG{o}{|} \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{[}\PYG{n}{n}\PYG{p}{,}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{l+m+mi}{1}\PYG{p}{],} \PYG{n}{divisoresPrimos} \PYG{n}{x} \PYG{o}{==} \PYG{n}{sort} \PYG{p}{[}\PYG{n}{p}\PYG{p}{,}\PYG{n}{q}\PYG{p}{]]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (divisoresPrimos n) es la lista de los divisores primos de x. Por}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ejemplo, }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    divisoresPrimos 180  ==  [2,3,5]}
+\PYG{n+nf}{divisoresPrimos} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{p}{[}\PYG{k+kt}{Int}\PYG{p}{]}
+\PYG{n+nf}{divisoresPrimos} \PYG{n}{n} \PYG{o+ow}{=} \PYG{p}{[}\PYG{n}{x} \PYG{o}{|} \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{n}{n}\PYG{p}{],} \PYG{n}{rem} \PYG{n}{n} \PYG{n}{x} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{,} \PYG{n}{esPrimo} \PYG{n}{x}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (esPrimo n) se verifica si n es primo. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    esPrimo 7  ==  True}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    esPrimo 9  ==  False}
+\PYG{n+nf}{esPrimo} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}
+\PYG{n+nf}{esPrimo} \PYG{n}{n} \PYG{o+ow}{=} \PYG{p}{[}\PYG{n}{x} \PYG{o}{|} \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{n}{n}\PYG{p}{],} \PYG{n}{rem} \PYG{n}{n} \PYG{n}{x} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{]} \PYG{o}{==} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{n}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} 2ª solución:}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ============}
+
+\PYG{n+nf}{mayorSoloDiv2} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int}
+\PYG{n+nf}{mayorSoloDiv2} \PYG{n}{p} \PYG{n}{q} \PYG{n}{n} 
+    \PYG{o}{|} \PYG{n}{null} \PYG{n}{xs} \PYG{o+ow}{=} \PYG{l+m+mi}{0}
+    \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{n}{head} \PYG{n}{xs}
+    \PYG{k+kr}{where} \PYG{n}{xs} \PYG{o+ow}{=} \PYG{p}{[}\PYG{n}{x} \PYG{o}{|} \PYG{n}{x} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{[}\PYG{n}{n}\PYG{p}{,}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{l+m+mi}{1}\PYG{p}{],} \PYG{n}{soloDivisible} \PYG{n}{p} \PYG{n}{q} \PYG{n}{x}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (soloDivisible p q x) se verifica si x es divisible por los primos p}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} y por q, y sólo por ellos. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    soloDivisible 2 3 96  ==  True}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    soloDivisible 3 5 90  ==  False}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    soloDivisible 3 5 75  ==  True}
+\PYG{n+nf}{soloDivisible} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}
+\PYG{n+nf}{soloDivisible} \PYG{n}{p} \PYG{n}{q} \PYG{n}{x} \PYG{o+ow}{=}
+    \PYG{n}{mod} \PYG{n}{x} \PYG{n}{p} \PYG{o}{==} \PYG{l+m+mi}{0} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{mod} \PYG{n}{x} \PYG{n}{q} \PYG{o}{==} \PYG{l+m+mi}{0} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{aux} \PYG{n}{x}
+    \PYG{k+kr}{where} \PYG{n}{aux} \PYG{n}{x} \PYG{o}{|} \PYG{n}{x} \PYG{p}{`}\PYG{n}{elem}\PYG{p}{`} \PYG{p}{[}\PYG{n}{p}\PYG{p}{,}\PYG{n}{q}\PYG{p}{]} \PYG{o+ow}{=} \PYG{k+kt}{True}
+                \PYG{o}{|} \PYG{n}{mod} \PYG{n}{x} \PYG{n}{p} \PYG{o}{==} \PYG{l+m+mi}{0}   \PYG{o+ow}{=} \PYG{n}{aux} \PYG{p}{(}\PYG{n}{div} \PYG{n}{x} \PYG{n}{p}\PYG{p}{)}
+                \PYG{o}{|} \PYG{n}{mod} \PYG{n}{x} \PYG{n}{q} \PYG{o}{==} \PYG{l+m+mi}{0}   \PYG{o+ow}{=} \PYG{n}{aux} \PYG{p}{(}\PYG{n}{div} \PYG{n}{x} \PYG{n}{q}\PYG{p}{)}
+                \PYG{o}{|} \PYG{n}{otherwise}      \PYG{o+ow}{=} \PYG{k+kt}{False}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 4.1. Dado un número n, calculamos la suma de sus divisores}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} propios reiteradamente hasta que quede un número primo. Por ejemplo,}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    n  | divisores propios                    | suma de div. propios}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}+\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}   30  | [1,2,3,5,6,10,15]                    |  42}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}   42  | [1,2,3,6,7,14,21]                    |  54}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}   54  | [1,2,3,6,9,18,27]                    |  66}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}   66  | [1,2,3,6,11,22,33]                   |  78}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}   78  | [1,2,3,6,13,26,39]                   |  90}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}   90  | [1,2,3,5,6,9,10,15,18,30,45]         | 144}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}  144  | [1,2,3,4,6,8,9,12,16,18,24,36,48,72] | 259}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}  259  | [1,7,37]                             |  45}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}   45  | [1,3,5,9,15]                         |  33}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}   33  | [1,3,11]                             |  15}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}   15  | [1,3,5]                              |   9}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    9  | [1,3]                                |   4}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    4  | [1,2]                                |   3}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    3 (es primo)}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Definir una función }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumaDivReiterada :: Int \PYGZhy{}\PYGZgt{} Int}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} tal que (sumaDivReiterada n) calcule reiteradamente la suma de los}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} divisores propios hasta que se llegue a un número primo. Por ejemplo, }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumaDivReiterada 30   == 3}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumaDivReiterada 52   == 3}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumaDivReiterada 5289 == 43}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumaDivReiterada 1024 == 7}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{n+nf}{sumaDivReiterada} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int}
+\PYG{n+nf}{sumaDivReiterada} \PYG{n}{n} 
+    \PYG{o}{|} \PYG{n}{esPrimo} \PYG{n}{n}   \PYG{o+ow}{=} \PYG{n}{n}
+    \PYG{o}{|} \PYG{n}{otherwise} \PYG{o+ow}{=} \PYG{n}{sumaDivReiterada} \PYG{p}{(}\PYG{n}{sumaDivPropios} \PYG{n}{n}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (sumaDivPropios n) es la suma de los divisores propios de n. Por}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} ejemplo, }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    sumaDivPropios 30  ==  42}
+\PYG{n+nf}{sumaDivPropios} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Int}
+\PYG{n+nf}{sumaDivPropios} \PYG{n}{n} \PYG{o+ow}{=} \PYG{n}{sum} \PYG{p}{[}\PYG{n}{k} \PYG{o}{|} \PYG{n}{k} \PYG{o+ow}{\PYGZlt{}\PYGZhy{}} \PYG{p}{[}\PYG{l+m+mi}{1}\PYG{o}{..}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{],} \PYG{n}{rem} \PYG{n}{n} \PYG{n}{k} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Ejercicio 4.2. ¿Hay números naturales para los que la función}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} anterior no termina? Si crees que los hay, explica por qué y}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} encuentra los tres primeros  números para los que la función anterior}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} no terminaría. En caso contrario, justifica por qué termina siempre.}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} .....................................................................}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Basta observar que si n es igual a la suma de sus divisores propios}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} (es decir, si n es un número perfecto), la función no termina porque}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} vuelve a hacer la suma reiterada de sí mismo otra vez. Luego, la}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} función no termina para los números perfectos. }
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Los números perfectos se definen por}
+\PYG{n+nf}{esPerfecto} \PYG{o+ow}{::} \PYG{k+kt}{Int} \PYG{o+ow}{\PYGZhy{}\PYGZgt{}} \PYG{k+kt}{Bool}
+\PYG{n+nf}{esPerfecto} \PYG{n}{n} \PYG{o+ow}{=} \PYG{n}{sumaDivPropios} \PYG{n}{n} \PYG{o}{==} \PYG{n}{n}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Los 3 primeros números perfectos se calcula por}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    ghci\PYGZgt{} take 3 [n | n \PYGZlt{}\PYGZhy{} [1..], esPerfecto n]}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    [6,28,496]}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Por tanto, los tres primeros números para los que el algoritmo no}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} termina son los 6, 28 y 496.}
+
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{} Se puede comprobar con }
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}    ghci\PYGZgt{} sumaDivReiterada 6}
+\PYG{c+c1}{\PYGZhy{}\PYGZhy{}      C\PYGZhy{}c C\PYGZhy{}cInterrupted.}
+\end{Verbatim}
